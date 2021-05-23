@@ -4,8 +4,8 @@ class LogIn {
     logList: any[] = [];
     token = 'token';
 
-    async loginUser(credentials: { email: string, password: string }) {
-        return await fetch(`${API}/register/login`, {
+    async loginUser(credentials: { email: string, password: string },role:string) {
+        return await fetch(`${API}/register/login/${role}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -14,8 +14,8 @@ class LogIn {
         })
             .then(data => data.json())
     }
-    async signUpUser(credentials: { name: string, password: string, password1: string, email: string }) {
-        return await fetch(`${API}/register/signUp`, {
+    async signUpUser(credentials: { name: string, password: string, password1: string, email: string },role:string) {
+        return await fetch(`${API}/register/signUp/${role}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,8 +24,8 @@ class LogIn {
         })
             .then(data => data.json())
     }
-    async approveHr(credentials: { _id: string, isAuth: boolean, section: string }) {
-        return await fetch(`${API}/register/auth`, {
+    async approveHr(credentials: { _id: string, isAuth: boolean, section: string },role:string) {
+        return await fetch(`${API}/register/auth/${role}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,9 +34,9 @@ class LogIn {
         })
             .then(data => data.json())
     }
-    async getUserUseToken(token: string) {
+    async getUserUseToken(token: string,role:string) {
         try {
-            return await fetch(`${API}/register/useToken`, {
+            return await fetch(`${API}/register/useToken/${role}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,8 +48,8 @@ class LogIn {
                 })
         }
         catch (err) { console.error(err) }
-        finally { }
     }
+
     getToken() {
         return this.getTokenLocal() || this.getTokenSession()|| '';
     }
@@ -75,7 +75,6 @@ class LogIn {
 
     getTokenLocal() {
         return localStorage.getItem(this.token);
-
     }
 
     refreshToken(token: string) {

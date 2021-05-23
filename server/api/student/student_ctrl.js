@@ -100,7 +100,7 @@ async function deleteStudentById(req, res) {
 async function getAllStudents(req, res) {
     const token = req.headers.authorization
     if(tokenChecker(token,res) !== true) return
-    const getAllDocsSuccessCb = (data)=> successHandler(data,res,'got')
+    const getAllDocsSuccessCb = (data)=> successHandler(data,res,'list')
     const getAllDocsFailCb = () => failHandler('list',res)
     try {
         authToken(token, async() => {

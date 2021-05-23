@@ -10,6 +10,10 @@ const student = new Schema({
             type: String,
             required: true
         },
+        name: {
+            type: String,
+            required: true
+        },
         password: {
             type: String,
             required: true
@@ -18,8 +22,6 @@ const student = new Schema({
             type: Boolean,
             default: false
         },
-        firstName: String,
-        lastName: String,
         dateOfBirth:Date,
         country: String,
         city: String,

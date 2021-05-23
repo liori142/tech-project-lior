@@ -2,6 +2,7 @@ import components from './components'
 import styles from './styles'
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import {getAllStudents} from './service/students.service';
 import service from './service';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import windowDimensionsActions from './redux/actions/windowDimensions.actions';
@@ -31,7 +32,7 @@ function App(props: any) {
   useEffect(() => {
     const token = login.default.getToken();
     if (token) {
-      getUserUseToken(token).then((userDataUseToken) => {
+      getUserUseToken(token,'student').then((userDataUseToken) => {
         if (userDataUseToken.success) {
           setUserData(userDataUseToken.data)
         }
@@ -43,6 +44,8 @@ function App(props: any) {
   }, [getUserUseToken, login.default, setUserData]);
 
   useEffect(() => {
+    console.log(getAllStudents());
+
     function handleResize() {
       setWindowDimensions(getWindowDimensions())
     }
@@ -63,9 +66,9 @@ function App(props: any) {
 
           <button onClick={() => {
             login.default.loginUser({
-              password: '123456',
-              email: 'jamber.simantov@walla.co.il'
-            })
+              password: '123123',
+              email: 'succuss@gmail.com'
+            },'student')
               .then(res => res.success && login.default.setTokenLocal(res.token))
           }}>login as lorem ipsum</button>
 
