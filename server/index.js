@@ -13,6 +13,7 @@ const passport = require('passport')
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
 const passportFunc = require('./config/passport')
+const smsRouter = require('./api/sms')
 
 const path = require('path');
 
@@ -33,6 +34,8 @@ const options = {
     // apis:["./server/routes/students.js"]
     apis:["./server/api/student/*.js"]
 }
+
+ 
 const specs = swaggerJsDoc(options)
 
 const app = express()
@@ -58,6 +61,7 @@ app.use('/register', register_router);
 app.use('/hrs', hrRouter);
 app.use('/students', studentRouter);
 app.use('/jobOffers', jobOfferRouter);
+app.use('/sms', smsRouter);
 
 
 if (process.env.NODE_ENV === 'production') {
